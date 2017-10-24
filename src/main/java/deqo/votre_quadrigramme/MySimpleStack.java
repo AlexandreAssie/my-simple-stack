@@ -21,7 +21,11 @@ public class MySimpleStack implements SimpleStack{
     }
 
     public Item peek() throws EmptyStackException {
-        return this.stack.get(this.stack.size()-1);
+        int taille = this.stack.size()-1;
+        if(taille < 0 ){
+            throw new EmptyStackException();
+        }
+        return this.stack.get(taille);
     }
 
     public Item pop() throws EmptyStackException {

@@ -2,6 +2,8 @@ package deqo.votre_quadrigramme;
 
 import org.junit.Test;
 
+import java.util.EmptyStackException;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -21,12 +23,18 @@ public class MySimpleStackTest {
 
     @Test
     public void peek() throws Exception {
+
         stack.push(item);
 
         assertEquals("Un element ",item,stack.peek());
         Item item2 = new Item(20);
         stack.push(item2);
         assertThat(stack.peek(),is(item2));
+    }
+
+    @Test(expected=EmptyStackException.class)
+    public void testPeekException() throws Exception {
+        stack.pop();
     }
 
     @Test
