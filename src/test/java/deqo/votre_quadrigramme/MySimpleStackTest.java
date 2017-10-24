@@ -62,14 +62,11 @@ public class MySimpleStackTest {
     @Test
     public void getSize() throws Exception {
         assertEquals("La methode getSize doit retourner 0 si elle est vide",0,stack.getSize());
-
         stack.push(new Item(1));
         assertEquals("La methode doit retourner 1 car un element est dedans",1,stack.getSize());
         stack.push(new Item(1));
-
         assertEquals("La methode doit retourner 2 car un element est dedans",2,stack.getSize());
         stack.pop();
-
         assertEquals("La methode doit retourner 1 car un element est dedans",1,stack.getSize());
     }
 
