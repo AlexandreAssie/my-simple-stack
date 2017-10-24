@@ -2,65 +2,67 @@ package deqo.votre_quadrigramme;
 
 import org.junit.Test;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class MySimpleStackTest {
+    MySimpleStack stack = new MySimpleStack();
+    Item item = new Item(10);
+
     @Test
     public void push() throws Exception {
-        MySimpleStack stack = new MySimpleStack();
-        Item myItem = new Item(10);
-        assertEquals("",0,stack.getSize());
-        stack.push(myItem);
+        assertEquals("La pile doit etre vide car 0 element a l'interieur",0,stack.getSize());
+        stack.push(item);
 
-        assertEquals("",1,stack.getSize());
-        assertEquals("",myItem,stack.peek());
+        assertEquals("La pile doit contenir un element car un element est inseré",1,stack.getSize());
+        assertEquals("L'element doit etre l'element rentré",item,stack.peek());
 
     }
 
     @Test
     public void peek() throws Exception {
-        MySimpleStack stack = new MySimpleStack();
-        Item myItem = new Item(10);
-        stack.push(myItem);
+        stack.push(item);
 
-        assertEquals("",myItem,stack.peek());
+        assertEquals("Un element ",item,stack.peek());
+        Item item2 = new Item(20);
+        stack.push(item2);
+        assertThat(stack.peek(),is(item2));
     }
 
     @Test
     public void pop() throws Exception {
-        MySimpleStack stack = new MySimpleStack();
-        Item myItem = new Item(10);
-        stack.push(myItem);
+        stack.push(new Item(20));
+        stack.push(item);
 
-        assertEquals("",1,stack.getSize());
-        assertEquals("",myItem,stack.pop());
-        assertEquals("",0,stack.getSize());
+        assertEquals("La pile doit contenir un element",2,stack.getSize());
+        assertEquals("La methode pop doit retourner l'item",item,stack.pop());
+        assertEquals("La methode pop doit remove l'element",1,stack.getSize());
+
     }
 
     @Test
     public void isEmpty() throws Exception {
-        MySimpleStack stack = new MySimpleStack();
 
-        // Assertions (oracle)
-        assertTrue("A new stack should be empty", stack.isEmpty());
-        assertEquals("A new stack has no element", 0, stack.getSize());
+        assertThat(stack.isEmpty(), is(true));
 
+        stack.push(item);
+
+        assertThat(stack.isEmpty(),is(false));
     }
 
 
     @Test
     public void getSize() throws Exception {
-        MySimpleStack stack = new MySimpleStack();
-        assertEquals("",0,stack.getSize());
+        assertEquals("La methode getSize doit retourner 0 si elle est vide",0,stack.getSize());
 
         stack.push(new Item(1));
-        assertEquals("",1,stack.getSize());
+        assertEquals("La methode doit retourner 1 car un element est dedans",1,stack.getSize());
         stack.push(new Item(1));
 
-        assertEquals("",2,stack.getSize());
+        assertEquals("La methode doit retourner 2 car un element est dedans",2,stack.getSize());
         stack.pop();
 
-        assertEquals("",1,stack.getSize());
+        assertEquals("La methode doit retourner 1 car un element est dedans",1,stack.getSize());
     }
 
 
